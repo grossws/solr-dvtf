@@ -3,7 +3,7 @@
 
 [DocValues][solr-dv]-enabled [TextField][solr-tf] for [Apache Solr][solr].
 
-- [DocValuesTextField](src/java/org/anenerbe/solr/DocValuesTextField.java) (which is subclass of [solr.TextField][solr-tf])
+- [DocValuesTextField](src/main/java/org/anenerbe/solr/DocValuesTextField.java) (which is subclass of [solr.TextField][solr-tf])
 
 [solr]: http://lucene.apache.org/solr/
 [solr-tf]: http://lucene.apache.org/solr/api/solr-core/org/apache/solr/schema/TextField.html
