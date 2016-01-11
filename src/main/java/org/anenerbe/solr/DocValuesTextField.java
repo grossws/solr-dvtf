@@ -56,6 +56,11 @@ public class DocValuesTextField extends TextField {
   public void checkSchemaField(SchemaField field) {
   }
 
+  @Override
+  public boolean multiValuedFieldCache() {
+    return isMultiValued();
+  }
+
   private List<String> analyzedField(SchemaField field, Object value) {
     try {
       List<String> result = new ArrayList<>();
