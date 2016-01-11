@@ -19,6 +19,12 @@ import java.util.Map;
 
 /**
  * solr.TextField with enabled docValues
+ * <p>
+ * This implementation ensures that tokenizer and token filter chain produces
+ * only one token if field is single-valued, so its result can be stored
+ * in {@link SortedDocValuesField}.
+ * <p>
+ * If field is multi-valued, it's stored in {@link SortedSetDocValuesField}.
  */
 public class DocValuesTextField extends TextField {
   @Override
@@ -56,6 +62,13 @@ public class DocValuesTextField extends TextField {
   public void checkSchemaField(SchemaField field) {
   }
 
+  /**
+   * For correct {@link org.apache.solr.request.DocValuesFacets} work.
+   * <p>
+   * {@inheritDoc}
+   *
+   * @return {@code true} if field has effectively more than one value
+   */
   @Override
   public boolean multiValuedFieldCache() {
     return isMultiValued();
