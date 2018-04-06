@@ -33,10 +33,10 @@ public class DocValuesTextField extends TextField {
   }
 
   @Override
-  public List<IndexableField> createFields(SchemaField field, Object value, float boost) {
+  public List<IndexableField> createFields(SchemaField field, Object value) {
     if (field.hasDocValues()) {
       List<IndexableField> fields = new ArrayList<>();
-      fields.add(createField(field, value, boost));
+      fields.add(createField(field, value));
 
       List<String> data = analyzedField(field, value);
       if (field.multiValued()) {
@@ -54,7 +54,7 @@ public class DocValuesTextField extends TextField {
 
       return fields;
     } else {
-      return Collections.singletonList(createField(field, value, boost));
+      return Collections.singletonList(createField(field, value));
     }
   }
 
