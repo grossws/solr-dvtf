@@ -4,7 +4,7 @@
 
   <groupId>org.anenerbe.solr</groupId>
   <artifactId>solr-dvtf</artifactId>
-  <version>0.3.0</version>
+  <version>0.3.1-SNAPSHOT</version>
 
   <properties>
     <solr.version>7.5.0</solr.version>
@@ -55,7 +55,7 @@
   <scm>
     <connection>scm:git:https://github.com/grossws/solr-dvtf.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/grossws/solr-dvtf.git</developerConnection>
-    <tag>v0.3.0</tag>
+    <tag>master</tag>
   </scm>
 
   <licenses>
