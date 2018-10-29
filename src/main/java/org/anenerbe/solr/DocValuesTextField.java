@@ -25,10 +25,25 @@ import java.util.Map;
  * in {@link SortedDocValuesField}.
  * <p>
  * If field is multi-valued, it's stored in {@link SortedSetDocValuesField}.
+ * <p>
+ * {@code docValues} are enabled implicitly and specifying {@code docValues="false"} will lead to exception.
+ * <p>
+ * By default field is multi-valued (if not explicitly set otherwise).
  */
 public class DocValuesTextField extends TextField {
   @Override
   protected void init(IndexSchema schema, Map<String, String> args) {
+    // fail if docValues==false
+    if ((falseProperties & DOC_VALUES) != 0) {
+      throw new SolrException(SolrException.ErrorCode.SERVER_ERROR, getClass().getName() + " requires docValues==true");
+    }
+    // force docValues
+    properties |= DOC_VALUES;
+    // enable multiValued if not explicitly set to false
+    if ((falseProperties & MULTIVALUED) == 0) {
+      properties |= MULTIVALUED;
+    }
+
     super.init(schema, args);
   }
 
