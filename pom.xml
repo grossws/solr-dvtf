@@ -58,6 +58,13 @@
     <tag>master</tag>
   </scm>
 
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <url>https://maven.pkg.github.com/grossws/solr-dvtf</url>
+    </repository>
+  </distributionManagement>
+
   <licenses>
     <license>
       <name>MIT</name>
