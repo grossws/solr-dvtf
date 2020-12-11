@@ -7,7 +7,7 @@
   <version>0.5.4-SNAPSHOT</version>
 
   <properties>
-    <solr.version>8.4.1</solr.version>
+    <solr.version>8.7.0</solr.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
