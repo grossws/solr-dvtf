@@ -34,3 +34,20 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
       run: mvn deploy --file pom.xml
+
+    - uses: actions/setup-java@v2
+      if: startsWith(github.ref, 'refs/tags/v')
+      with:
+        distribution: zulu
+        java-version: 11
+        server-id: nexus
+        server-username: NEXUS_USERNAME
+        server-password: NEXUS_PASSWORD
+
+    - name: Publish to Nexus
+      if: startsWith(github.ref, 'refs/tags/v')
+      env:
+        NEXUS_URL: ${{ secrets.NEXUS_URL }}
+        NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
+        NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
+      run: mvn deploy -DaltDeploymentRepository="nexus::default::${NEXUS_URL}/repository/releases"
