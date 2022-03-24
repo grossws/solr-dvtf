@@ -1,0 +1,6 @@
+[plugins]
+nebula-release = { id = "nebula.release", version = "16.0.0" }
+private-repo-publish = { id = "ws.gross.private-repo-publish", version = "0.14.6" }
+
+[libraries]
+solr-core = { module = "org.apache.solr:solr-core", version = "8.11.1" }

@@ -1,2 +1,2 @@
-# maven target dirs
-target/
+.gradle/
+build/
