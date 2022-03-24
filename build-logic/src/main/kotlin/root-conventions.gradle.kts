@@ -1,4 +1,3 @@
-import nebula.plugin.release.ReleaseExtension
 import nebula.plugin.release.ReleasePlugin
 
 plugins {
