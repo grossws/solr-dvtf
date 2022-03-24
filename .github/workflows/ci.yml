@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - 'v*'
+    paths-ignore:
+      - '**.adoc'
+  pull_request:
+    branches:
+      - master
+    paths-ignore:
+      - '**.adoc'
+
+concurrency:
+  group: ci-${{ github.event_type == 'push' && github.ref || github.event.number }}
+  cancel-in-progress: ${{ github.ref_type != 'tag' }}
+
+jobs:
+  build:
+    name: Build
+    uses: grossws/.github/.github/workflows/build-gradle.yml@v1
+    with:
+      java-version: 11
+      use-configuration-cache: false
+    secrets:
+      nexus-url: ${{ secrets.NEXUS_URL }}
+      nexus-username: ${{ secrets.NEXUS_USERNAME }}
+      nexus-password: ${{ secrets.NEXUS_PASSWORD }}
+      slack-channel: ${{ secrets.SLACK_CHANNEL }}
+      slack-bot-token: ${{ secrets.SLACK_BOT_TOKEN }}
+
+  release:
+    name: Release
+    if: ${{ startsWith(github.ref, 'refs/tags/v') }}
+    uses: grossws/.github/.github/workflows/release-gradle.yml@v1
+    needs:
+      - build
+    with:
+      java-version: 11
+    secrets:
+      nexus-url: ${{ secrets.NEXUS_URL }}
+      nexus-username: ${{ secrets.NEXUS_USERNAME }}
+      nexus-password: ${{ secrets.NEXUS_PASSWORD }}
+      slack-channel: ${{ secrets.SLACK_CHANNEL }}
+      slack-bot-token: ${{ secrets.SLACK_BOT_TOKEN }}
